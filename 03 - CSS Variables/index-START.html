@@ -79,21 +79,18 @@
     </style>
 
     <script>
-      const spacing = document.querySelector("#spacing");
-      const blur = document.querySelector("#blur");
-      const base = document.querySelector("#base");
-      const img = document.querySelector("img");
-      const root = document.documentElement;
+      const inputs = document.querySelectorAll(".controls input");
 
-      spacing.addEventListener("input", (e) => {
-        root.style.setProperty("--spacing", `${spacing.value}`);
-      });
-      blur.addEventListener("input", (e) => {
-        root.style.setProperty("--blur", `${blur.value / 50}px`);
-      });
-      base.addEventListener("input", (e) => {
-        root.style.setProperty("--base", `${base.value}`);
-      });
+      function changeHandler() {
+        // or const suffix = (this.type == "range") ? "px" : "";
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
+
+      inputs.forEach((input) => input.addEventListener("input", changeHandler));
     </script>
   </body>
 </html>
