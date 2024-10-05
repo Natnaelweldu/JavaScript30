@@ -96,27 +96,28 @@
     </div>
 
     <script>
-      const checkBoxes = [...document.querySelectorAll("input[type=checkbox]")];
-      const clickedIndices = [];
+      const checkBoxes = [
+        ...document.querySelectorAll(".inbox input[type=checkbox]"),
+      ];
+      let lastChecked;
       let isShiftClicked = false;
 
       checkBoxes.forEach((checkbox, index) => {
         checkbox.addEventListener("click", (e) => {
           if (isShiftClicked) {
-            let lastClicked = clickedIndices[clickedIndices.length - 1];
-            let presentClick = checkBoxes.indexOf(e.target);
+            let nowChecked = checkBoxes.indexOf(e.target);
 
-            if (lastClicked > presentClick) {
-              let temp = lastClicked;
-              lastClicked = presentClick;
-              presentClick = temp;
+            if (lastChecked > nowChecked) {
+              let temp = lastChecked;
+              lastChecked = nowChecked;
+              nowChecked = temp;
             }
 
-            for (let i = lastClicked; i <= presentClick; i++) {
+            for (let i = lastChecked; i <= nowChecked; i++) {
               checkBoxes[i].checked = true;
             }
           }
-          clickedIndices.push(index);
+          lastChecked = index;
         });
       });
 
