@@ -7,6 +7,18 @@
     <link rel="icon" href="https://fav.farm/🔥" />
   </head>
   <body>
-    <script></script>
+    <script>
+      const key = [];
+      const secretCode = "natan";
+      const body = document.querySelector("body");
+      document.addEventListener("keydown", (e) => {
+        if (key.length >= 5) key.shift();
+        key.push(e.key);
+        console.log(key.join("").toString());
+        if (key.join("").toString() === secretCode) {
+          cornify_add();
+        }
+      });
+    </script>
   </body>
 </html>
